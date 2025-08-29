@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background: #0b1020; color: #e7eaf6; }
+.container { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+h1 { margin: 0 0 8px; font-size: 32px; }
+.sub { margin: 0 0 20px; color: #c2c8e6; }
+.card { background: #121734; border: 1px solid #27305f; border-radius: 12px; padding: 16px; }
+.label { display: block; margin-bottom: 8px; color: #cbd2ff; }
+textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #2e386b; background: #0f1430; color: #e7eaf6; resize: vertical; }
+.controls { margin: 12px 0; display: flex; gap: 8px; }
+button { padding: 10px 14px; border: 1px solid #5b6bff; background: #3b49df; color: white; border-radius: 8px; cursor: pointer; }
+button.secondary { background: transparent; color: #b7c0ff; border-color: #2e386b; }
+button:hover { filter: brightness(1.05); }
+.muted { color: #aab2e8; margin: 6px 0; }
+.result { margin: 6px 0 10px; font-weight: 600; }
+pre { background: #0f1430; color: #dbe1ff; padding: 12px; border: 1px solid #2e386b; border-radius: 8px; overflow: auto; }
+footer { margin-top: 16px; color: #9aa4e0; }

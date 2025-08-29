@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Token Length Checker</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Token Length Checker</h1>
+    <p class="sub">Enter a paragraph below. We’ll count tokens by splitting on spaces (simple split).</p>
+
+    <div class="card">
+      <label for="textInput" class="label">Your text</label>
+      <textarea id="textInput" placeholder="Paste or type here..." rows="10"></textarea>
+
+      <div class="controls">
+        <button id="btnCount">Count via API</button>
+        <button id="btnClear" class="secondary">Clear</button>
+      </div>
+
+      <div id="liveCount" class="muted">Live count: 0</div>
+      <div id="apiCount" class="result">API count: –</div>
+      <details>
+        <summary>Show tokens (API)</summary>
+        <pre id="tokensList">[]</pre>
+      </details>
+    </div>
+
+    <footer>
+      <span>Built with Flask + HTML/CSS/JS</span>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
