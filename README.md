@@ -1,50 +1,44 @@
-# Token Length Checker
+# Token Length Checker — Plus
 
-A simple Flask + HTML/CSS/JS app that counts tokens (words) in a paragraph.  
-Tokens are counted by splitting on spaces (very simple rule).
+Space-split token counter with extra stats and visuals.
 
 ## Features
-- Frontend (HTML/CSS/JS):
-  - Textarea to paste text
-  - Live token count (in browser, JavaScript split)
-  - API token count (via Flask backend)
-- Backend (Flask):
-  - `/api/count` endpoint accepts text and returns token count + token list
-- Lightweight, no database
+- **Baseline**: Live JS token count and `/api/count` (Flask)
+- **Stats** (`/api/stats`):
+  - Average word length, unique words, sentence & paragraph count
+  - Most frequent words (Top 5, ignoring stopwords)
+  - Reading time estimate (200 wpm)
+  - Longest / Shortest word
+- **UI**:
+  - Color-coded tokens (long words > 7 chars)
+  - Word cloud (wordcloud2.js via CDN)
+  - Top 5 frequency bar chart (Chart.js via CDN)
+  - Stopword removal toggle
+  - Download JSON/CSV exports
+  - Copy tokens to clipboard
+  - Dark/Light theme toggle
 
-## Run Locally
+## Run locally
 ```bash
-# clone repo
-git clone git@github.com:<your-username>/week2_ERAV4_token_length_checker.git
-cd week2_ERAV4_token_length_checker
-
-# create virtual environment
 python -m venv venv
-source venv/bin/activate   # on Windows: venv\Scripts\activate
-
-# install dependencies
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-
-# run server
 python app.py
 ```
-Visit: http://127.0.0.1:5000
+Open http://127.0.0.1:5000
 
-## Deployment
-This app can be deployed to AWS EC2 (or any VPS).  
-Steps:
-1. SSH into EC2  
-2. Install Python 3 & pip  
-3. Clone this repo  
-4. Install requirements  
-5. Run with `python app.py` (or with `gunicorn` for production)
-
-## Example
-Input:
+## Deploy (EC2 quick)
+```bash
+sudo apt-get update -y
+sudo apt-get install -y python3 python3-venv python3-pip git
+git clone https://github.com/Sagar063/week2_ERAV4_token_length_checker.git
+cd week2_ERAV4_token_length_checker
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py     # or: pip install gunicorn && gunicorn -b 0.0.0.0:5000 app:app
 ```
-Machine learning enables computers to learn from data.
-```
-Output: **7 tokens**
 
----
-Built as part of ERA V4 Week 2 Assignment 🚀
+## Notes
+- Tokenization uses **simple whitespace split** to match assignment.
+- Frequency & stats use lowercased, punctuation-trimmed tokens; optional stopword removal.

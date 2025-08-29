@@ -3,29 +3,68 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Token Length Checker</title>
+  <title>Token Length Checker — Plus</title>
   <link rel="stylesheet" href="/static/styles.css" />
+  <!-- Word Cloud & Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
-<body>
+<body class="theme-dark">
   <div class="container">
-    <h1>Token Length Checker</h1>
-    <p class="sub">Enter a paragraph below. We’ll count tokens by splitting on spaces (simple split).</p>
+    <header class="header">
+      <h1>Token Length Checker <span class="badge">Plus</span></h1>
+      <button id="themeToggle" class="secondary small">Toggle Theme</button>
+    </header>
+    <p class="sub">Space-split token counter with extra analysis, visuals, and exports.</p>
 
-    <div class="card">
-      <label for="textInput" class="label">Your text</label>
-      <textarea id="textInput" placeholder="Paste or type here..." rows="10"></textarea>
-
-      <div class="controls">
-        <button id="btnCount">Count via API</button>
-        <button id="btnClear" class="secondary">Clear</button>
+    <div class="grid">
+      <div class="card">
+        <label for="textInput" class="label">Your text</label>
+        <textarea id="textInput" placeholder="Paste or type here..." rows="10"></textarea>
+        <div class="controls">
+          <label class="checkbox">
+            <input type="checkbox" id="stopwordsToggle">
+            Remove stopwords
+          </label>
+          <button id="btnCount">Analyze via API</button>
+          <button id="btnClear" class="secondary">Clear</button>
+          <button id="btnCopy" class="secondary">Copy tokens</button>
+          <button id="btnExportJson" class="secondary">Download JSON</button>
+          <button id="btnExportCsv" class="secondary">Download CSV</button>
+        </div>
+        <div id="liveCount" class="muted">Live count: 0</div>
+        <div id="apiCount" class="result">API count: –</div>
       </div>
 
-      <div id="liveCount" class="muted">Live count: 0</div>
-      <div id="apiCount" class="result">API count: –</div>
-      <details>
-        <summary>Show tokens (API)</summary>
-        <pre id="tokensList">[]</pre>
-      </details>
+      <div class="card">
+        <h3>Stats</h3>
+        <div class="stats-grid">
+          <div><span>Words</span><strong id="stWords">–</strong></div>
+          <div><span>Chars</span><strong id="stChars">–</strong></div>
+          <div><span>Sentences</span><strong id="stSentences">–</strong></div>
+          <div><span>Paragraphs</span><strong id="stParas">–</strong></div>
+          <div><span>Unique</span><strong id="stUnique">–</strong></div>
+          <div><span>Avg Len</span><strong id="stAvgLen">–</strong></div>
+          <div><span>Read Time</span><strong id="stRead">–</strong></div>
+          <div><span>Longest</span><strong id="stLongest">–</strong></div>
+          <div><span>Shortest</span><strong id="stShortest">–</strong></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Top 5 Words</h3>
+        <canvas id="freqChart" height="140"></canvas>
+      </div>
+
+      <div class="card">
+        <h3>Word Cloud</h3>
+        <div id="cloud" class="cloud"></div>
+      </div>
+
+      <div class="card">
+        <h3>Tokens (API)</h3>
+        <div id="tokenContainer" class="tokens"></div>
+      </div>
     </div>
 
     <footer>
